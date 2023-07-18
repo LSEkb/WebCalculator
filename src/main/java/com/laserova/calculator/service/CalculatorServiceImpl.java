@@ -3,7 +3,7 @@ package com.laserova.calculator.service;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CalculatorServiceImplement implements CalculatorService {
+public class CalculatorServiceImpl implements CalculatorService {
 
     @Override
     public String welcome() {
@@ -30,7 +30,6 @@ public class CalculatorServiceImplement implements CalculatorService {
 
     @Override
     public String divide(int num1, int num2) {
-        int checkInfinity = num1 / num2;
         double result = (double) num1 / num2;
         return num1 + " / " + num2 + " = " + result;
     }

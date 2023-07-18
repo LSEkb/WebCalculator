@@ -37,8 +37,8 @@ public class CalculatorController {
 
     @GetMapping("/divide")
     public String divide(@RequestParam int num1, @RequestParam int num2) {
-        if (calculatorService.divide(num1, num2).contains("Infinity")){
-            return "Получена ошибка: / by zero";
+        if (num2 == 0) {
+            throw new IllegalArgumentException("/ by zero");
         }
         return calculatorService.divide(num1, num2);
     }
