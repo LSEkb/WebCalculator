@@ -18,9 +18,7 @@ public class CalculatorServiceImpl implements CalculatorService {
 
     @Override
     public int minus(int num1, int num2) {
-        int result = num1 - num2;
-        int r1 = Math.subtractExact(num1,num2);
-        return num1 - num2;
+        return Math.subtractExact(num1,num2);
     }
 
     @Override

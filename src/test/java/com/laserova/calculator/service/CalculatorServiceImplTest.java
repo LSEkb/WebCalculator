@@ -106,6 +106,7 @@ class CalculatorServiceImplTest {
         return Stream.of(
                 Arguments.of(4, 2, 6),
                 Arguments.of(-2, -2, -4),
+                Arguments.of(-6, 2, -4),
                 Arguments.of(4, -2, 2)
         );
     }
