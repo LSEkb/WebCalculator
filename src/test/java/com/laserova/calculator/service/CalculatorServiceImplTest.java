@@ -20,42 +20,48 @@ class CalculatorServiceImplTest {
     }
 
     @Test
-    void plus_num1plusNum2_resultInt() {
+    void plus_num1PlusNum2Ordinary_resultInt() {
         var result = sat.plus(4, 2);
         assertEquals(6, result);
     }
 
     @Test
-    void plus_num2Is0_throwArithmeticException() {
+    void plus_whenSumMoreThanMaxInteger_throwArithmeticException() {
         assertThrows(ArithmeticException.class, () -> sat.plus(Integer.MAX_VALUE, Integer.MAX_VALUE));
     }
 
     @Test
-    void minus_num1minusNum2_resultInt() {
+    void minus_num1MinusNum2Ordinary_resultInt() {
         var result = sat.minus(4, 2);
         assertEquals(2, result);
     }
 
     @Test
-    void minus_num1BelowNum2Sign_resultSign() {
+    void minus_num1LessThanNum2_resultNegativeSign() {
         var result = sat.minus(2, 4);
         assertEquals(-2, result);
+
     }
 
     @Test
-    void multiply_num1plusNum2Sign_resultInt() {
+    void minus_whenDifferenceLessThanMaxInteger_throwArithmeticException() {
+        assertThrows(ArithmeticException.class, () -> sat.minus(Integer.MIN_VALUE, Integer.MAX_VALUE));
+    }
+
+    @Test
+    void multiply_num1plusNum2BothPositiveSign_resultPositiveSign() {
         var result = sat.multiply(4, 2);
         assertEquals(8, result);
     }
 
     @Test
-    void multiply_num1MultipliedNum2DifferentSigns_resultSign() {
+    void multiply_num1MultipliedNum2DifferentSigns_resultNegativeSign() {
         var result = sat.multiply(-4, 2);
         assertEquals(-8, result);
     }
 
     @Test
-    void multiply_num1MultipliedNum2SameSigns_resultSign() {
+    void multiply_num1MultipliedNum2BothNegativeSigns_resultPositiveSign() {
         var result = sat.multiply(-4, -2);
         assertEquals(8, result);
     }
@@ -78,7 +84,7 @@ class CalculatorServiceImplTest {
     }
 
     @Test
-    void divide_num1DividedNum2Sign_resultSign() {
+    void divide_num1DividedNum2DifferentSign_resultNegativeSign() {
         var result = sat.divide(-4, 2);
         assertEquals(-2, result);
     }
