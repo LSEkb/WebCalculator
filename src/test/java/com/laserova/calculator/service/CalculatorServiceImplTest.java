@@ -26,8 +26,9 @@ class CalculatorServiceImplTest {
     }
 
     @Test
-    void plus_whenSumMoreThanMaxInteger_throwArithmeticException() {
-        assertThrows(ArithmeticException.class, () -> sat.plus(Integer.MAX_VALUE, Integer.MAX_VALUE));
+    void plus_num1AndNum2BothIsMaxInt_correctResult() {
+        long result = sat.plus(Integer.MAX_VALUE, Integer.MAX_VALUE);
+        assertEquals(4_294_967_294L, result);
     }
 
     @Test
@@ -44,8 +45,9 @@ class CalculatorServiceImplTest {
     }
 
     @Test
-    void minus_whenDifferenceLessThanMaxInteger_throwArithmeticException() {
-        assertThrows(ArithmeticException.class, () -> sat.minus(Integer.MIN_VALUE, Integer.MAX_VALUE));
+    void minus_num1IsMinIntAndNum2IsMaxInt_correctResult() {
+        long result = sat.minus(Integer.MIN_VALUE, Integer.MAX_VALUE);
+        assertEquals(-4_294_967_295L, result);
     }
 
     @Test
@@ -67,8 +69,9 @@ class CalculatorServiceImplTest {
     }
 
     @Test
-    void multiply_num2Is0_throwArithmeticException() {
-        assertThrows(ArithmeticException.class, () -> sat.multiply(Integer.MAX_VALUE, Integer.MAX_VALUE));
+    void multiply_num1AndNum2BothIsMaxInt_correctResult() {
+        long result = sat.multiply(Integer.MAX_VALUE, Integer.MAX_VALUE);
+        assertEquals(4.6116860141324206E18, result);
     }
 
     @Test
@@ -97,7 +100,7 @@ class CalculatorServiceImplTest {
 
     @ParameterizedTest
     @MethodSource("dataForPlus")
-    void plus__returnInt(int num1, int num2, int expectedResult) {
+    void plus__returnInt(int num1, int num2, long expectedResult) {
         var result = sat.plus(num1, num2);
         assertEquals(expectedResult, result);
     }
@@ -107,13 +110,15 @@ class CalculatorServiceImplTest {
                 Arguments.of(4, 2, 6),
                 Arguments.of(-2, -2, -4),
                 Arguments.of(-6, 2, -4),
-                Arguments.of(4, -2, 2)
+                Arguments.of(4, -2, 2),
+                Arguments.of(Integer.MAX_VALUE, Integer.MAX_VALUE, 4_294_967_294L),
+                Arguments.of(Integer.MIN_VALUE, Integer.MIN_VALUE, -4_294_967_296L)
         );
     }
 
     @ParameterizedTest
     @MethodSource("dataForMinus")
-    void minus__returnInt(int num1, int num2, int expectedResult) {
+    void minus__returnInt(int num1, int num2, long expectedResult) {
         var result = sat.minus(num1, num2);
         assertEquals(expectedResult, result);
     }
@@ -121,13 +126,14 @@ class CalculatorServiceImplTest {
     private static Stream<Arguments> dataForMinus() {
         return Stream.of(
                 Arguments.of(4, 2, 2),
-                Arguments.of(2, 4, -2)
+                Arguments.of(2, 4, -2),
+                Arguments.of(Integer.MAX_VALUE, Integer.MIN_VALUE, 4_294_967_295L)
         );
     }
 
     @ParameterizedTest
     @MethodSource("dataForMultiply")
-    void multiply__returnInt(int num1, int num2, int expectedResult) {
+    void multiply__returnInt(int num1, int num2, long expectedResult) {
         var result = sat.multiply(num1, num2);
         assertEquals(expectedResult, result);
     }
@@ -153,7 +159,8 @@ class CalculatorServiceImplTest {
                 Arguments.of(5, 2, 2.5),
                 Arguments.of(4, -2, -2),
                 Arguments.of(-4, -2, 2),
-                Arguments.of(-4, 2, -2)
+                Arguments.of(-4, 2, -2),
+                Arguments.of(Integer.MIN_VALUE, Integer.MIN_VALUE, 1)
         );
     }
 }

@@ -11,19 +11,18 @@ public class CalculatorServiceImpl implements CalculatorService {
     }
 
     @Override
-    public int plus(int num1, int num2) {
-        int result = num1 + num2;
-        return Math.addExact(num1,num2);
+    public long plus(int num1, int num2) {
+        return (long) num1 + num2;
     }
 
     @Override
-    public int minus(int num1, int num2) {
-        return Math.subtractExact(num1,num2);
+    public long minus(int num1, int num2) {
+        return (long) num1 - num2;
     }
 
     @Override
-    public int multiply(int num1, int num2) {
-        return Math.multiplyExact(num1, num2);
+    public long multiply(int num1, int num2) {
+        return (long) num1 * num2;
     }
 
     @Override
