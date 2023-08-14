@@ -67,7 +67,7 @@ class CalculatorServiceImplTest {
     }
 
     @Test
-    void multiply_num2Is0_throwArithmeticException() {
+    void multiply_num1AndNum2BothIsMaxInt_throwArithmeticException() {
         assertThrows(ArithmeticException.class, () -> sat.multiply(Integer.MAX_VALUE, Integer.MAX_VALUE));
     }
 
